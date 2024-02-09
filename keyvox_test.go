@@ -67,3 +67,23 @@ func TestTagsRetrieveSlug(t *testing.T) {
 	}
 	fmt.Println(tag)
 }
+
+func TestAuthorsList(t *testing.T) {
+	Setup(t)
+	authors, err := kv.authors.List()
+	if err != nil {
+		t.Fatalf("error listing authors: %s", err)
+	}
+
+	fmt.Println(authors)
+}
+
+func TestAuthorsRetrieveSlug(t *testing.T) {
+	Setup(t)
+	slug := os.Getenv("TAG_SLUG")
+	tag, err := kv.tags.Retrieve(slug)
+	if err != nil {
+		t.Fatalf("error getting tag: %s", err)
+	}
+	fmt.Println(tag)
+}
