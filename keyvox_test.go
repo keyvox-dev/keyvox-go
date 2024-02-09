@@ -36,4 +36,16 @@ func TestArticlesList(t *testing.T) {
 	for _, article := range articles {
 		fmt.Println(article)
 	}
+	fmt.Println("---------------")
+}
+
+func TestArticlesRetrieve(t *testing.T) {
+	Setup(t)
+
+	id := os.Getenv("ARTICLE_ID")
+	article, err := kv.articles.Retrieve(id)
+	if err != nil {
+		t.Fatalf("error getting article: %s", err)
+	}
+	fmt.Println(article)
 }

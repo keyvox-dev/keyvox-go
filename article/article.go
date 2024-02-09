@@ -47,5 +47,11 @@ func (a *Article) Retrieve(idOrSlug string) (map[string]interface{}, error) {
 	if err != nil {
 		return nil, fmt.Errorf("error fetching article: %s", err)
 	}
-	return data, nil
+
+	articleData, ok := data["data"].(map[string]interface{})
+	if !ok {
+		return nil, fmt.Errorf("article data not found in response")
+	}
+
+	return articleData, nil
 }
