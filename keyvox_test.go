@@ -33,10 +33,8 @@ func TestArticlesList(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error listing articles: %s", err)
 	}
-	for _, article := range articles {
-		fmt.Println(article)
-	}
-	fmt.Println("---------------")
+
+	fmt.Println(articles)
 }
 
 func TestArticlesRetrieve(t *testing.T) {
@@ -48,4 +46,24 @@ func TestArticlesRetrieve(t *testing.T) {
 		t.Fatalf("error getting article: %s", err)
 	}
 	fmt.Println(article)
+}
+
+func TestTagsList(t *testing.T) {
+	Setup(t)
+	tags, err := kv.tags.List()
+	if err != nil {
+		t.Fatalf("error listing tags: %s", err)
+	}
+
+	fmt.Println(tags)
+}
+
+func TestTagsRetrieveSlug(t *testing.T) {
+	Setup(t)
+	slug := os.Getenv("TAG_SLUG")
+	tag, err := kv.tags.Retrieve(slug)
+	if err != nil {
+		t.Fatalf("error getting tag: %s", err)
+	}
+	fmt.Println(tag)
 }
